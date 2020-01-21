@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @SpringBootTest
@@ -38,8 +37,9 @@ class CollectionOfEmbeddables1ApplicationTests {
 
         txRunner.runInNewTransaction(() -> {
             final User user = em.find(User.class, 1);
-            System.out.println(user);
+            em.remove(user);
         });
+
     }
 
 }

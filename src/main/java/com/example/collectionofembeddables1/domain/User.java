@@ -19,39 +19,39 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Entity(name = "USER")
+@Entity(name = "user")
 public class User {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
     @Embedded
-    Audit audit = new Audit();
+    private Audit audit = new Audit();
 
     @ElementCollection
-    @CollectionTable(name = "CONTACT_ADDRESS", joinColumns = @JoinColumn(name = "USER_ID"))
-    @AttributeOverride(name = "streetAddress", column = @Column(name = "STREET_ADDRESS"))
+    @CollectionTable(name = "contact_address", joinColumns = @JoinColumn(name = "user_id"))
+    @AttributeOverride(name = "streetAddress", column = @Column(name = "street_address"))
     private List<ContactAddress> address;
 
     @ElementCollection
-    @CollectionTable(name = "Contacts", joinColumns = @JoinColumn(name = "ID"))
-    @Column(name = "CONTACT_NO")
+    @CollectionTable(name = "contact", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "contact no")
     private Collection<String> contacts;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "USER_TYPE")
+    @Column(name = "user_type")
     private UserType userType;
 
     @PrePersist
     public void prePersist() {
-        System.out.println("User#prePersist");
+        System.out.println("User#prePersist"); // called
     }
 
 }

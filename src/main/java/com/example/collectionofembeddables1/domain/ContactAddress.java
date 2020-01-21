@@ -10,23 +10,23 @@ import javax.persistence.PrePersist;
 @Embeddable
 public class ContactAddress {
 
-    @Column(name = "STREET")
+    @Column(name = "street")
     private String streetAddress;
 
-    @Column(name = "STATE")
+    @Column(name = "state")
     private String state;
 
-    @Column(name = "CITY")
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "ZIP_CODE")
+    @Column(name = "zip_code")
     private String areaCode;
 
-    @Column(name = "ADDR_TYPE")
+    @Column(name = "addr_type")
     private String addressType;
 
     @PrePersist
     public void prePersist() {
-        System.out.println("ContactAddress#prePersist");
+        System.out.println("ContactAddress#prePersist"); // NOT called
     }
 }

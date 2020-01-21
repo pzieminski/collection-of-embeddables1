@@ -16,15 +16,15 @@ import java.util.Date;
 public class Audit {
 
     @Temporal(value = TemporalType.TIMESTAMP)
-    @Column(name = "CREATED_TIME")
+    @Column(name = "created_time")
     private Date creationTime;
 
     @Temporal(value = TemporalType.TIMESTAMP)
-    @Column(name = "UPDATED_TIME")
+    @Column(name = "updated_time")
     private Date updatedTime;
 
     @PrePersist
     public void prePersist() {
-        System.out.println("Audit#prePersist");
+        System.out.println("Audit#prePersist"); // called
     }
 }
