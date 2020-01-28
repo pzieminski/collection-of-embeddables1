@@ -53,8 +53,4 @@ class CollectionOfEmbeddables1Test {
         }};
 
     }
-
-    public static class Stuff {
-
-    }
 }
