@@ -1,7 +1,6 @@
 package com.example.collectionofembeddables1.domain;
 
 import com.example.collectionofembeddables1.Callbacks;
-import com.example.collectionofembeddables1.enums.UserType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +14,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
 
 import java.util.Collection;
 import java.util.List;
@@ -52,10 +54,27 @@ public class User {
     @Column(name = "user_type")
     private UserType userType;
 
+    @PostLoad
+    public void postLoad() {
+        LOG.info("postLoad");
+        Callbacks.userPostLoad();
+    }
+
     @PrePersist
     public void prePersist() {
-        LOG.info("User#prePersist"); // called
+        LOG.info("prePersist");
         Callbacks.userPrePersist();
     }
 
+    @PreUpdate
+    public void preUpdate() {
+        LOG.info("preUpdate");
+        Callbacks.userPreUpdate();
+    }
+
+    @PreRemove
+    public void preRemove() {
+        LOG.info("preRemove");
+        Callbacks.userPreRemove();
+    }
 }

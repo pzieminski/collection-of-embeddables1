@@ -1,4 +1,4 @@
-package com.example.collectionofembeddables1.enums;
+package com.example.collectionofembeddables1.domain;
 
 public enum UserType {
     EMPLOYEE,

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 
 @Data
@@ -28,9 +29,15 @@ public class ContactAddress {
     @Column(name = "addr_type")
     private String addressType;
 
+    @PostLoad
+    public void postLoad() {
+        LOG.info("postLoad"); // NOT called
+        Callbacks.contactAddressPostLoad();
+    }
+
     @PrePersist
     public void prePersist() {
-        LOG.info("ContactAddress#prePersist"); // NOT called
+        LOG.info("prePersist"); // NOT called
         Callbacks.contactAddressPrePersist();
     }
 }
