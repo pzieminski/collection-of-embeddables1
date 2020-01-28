@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020 OpenText Corporation. All Rights Reserved.
- * OpenText Confidential: Restricted Internal Distribution
- */
 package com.example.collectionofembeddables1.domain;
 
 import com.example.collectionofembeddables1.Callbacks;
