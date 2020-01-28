@@ -1,7 +1,9 @@
 package com.example.collectionofembeddables1.domain;
 
+import com.example.collectionofembeddables1.Callbacks;
 import com.example.collectionofembeddables1.enums.UserType;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CollectionTable;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "user")
+@Slf4j
 public class User {
 
     @Id
@@ -51,7 +54,8 @@ public class User {
 
     @PrePersist
     public void prePersist() {
-        System.out.println("User#prePersist"); // called
+        LOG.info("User#prePersist"); // called
+        Callbacks.userPrePersist();
     }
 
 }

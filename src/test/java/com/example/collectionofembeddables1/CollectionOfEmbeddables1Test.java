@@ -2,6 +2,8 @@ package com.example.collectionofembeddables1;
 
 import com.example.collectionofembeddables1.domain.ContactAddress;
 import com.example.collectionofembeddables1.domain.User;
+import mockit.Mocked;
+import mockit.Verifications;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Collections;
 
 @SpringBootTest
-class CollectionOfEmbeddables1ApplicationTests {
+class CollectionOfEmbeddables1Test {
 
     @PersistenceContext
     EntityManager em;
@@ -21,7 +23,8 @@ class CollectionOfEmbeddables1ApplicationTests {
     InTransactionRunner txRunner;
 
     @Test
-    void contextLoads() {
+    void test(@Mocked Callbacks callbacks) {
+
         txRunner.runInNewTransaction(() -> {
             User user = new User();
             user.setId(1);
@@ -36,10 +39,22 @@ class CollectionOfEmbeddables1ApplicationTests {
         });
 
         txRunner.runInNewTransaction(() -> {
-            final User user = em.find(User.class, 1);
-            em.remove(user);
+            final User u = em.find(User.class, 1);
+            em.remove(u);
         });
+
+        new Verifications() {{
+            Callbacks.userPrePersist();
+            times = 1;
+            Callbacks.auditPrePersist();
+            times = 1;
+            Callbacks.contactAddressPrePersist();
+            times = 1;
+        }};
 
     }
 
+    public static class Stuff {
+
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.collectionofembeddables1.domain;
 
+import com.example.collectionofembeddables1.Callbacks;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -8,6 +10,7 @@ import javax.persistence.PrePersist;
 
 @Data
 @Embeddable
+@Slf4j
 public class ContactAddress {
 
     @Column(name = "street")
@@ -27,6 +30,7 @@ public class ContactAddress {
 
     @PrePersist
     public void prePersist() {
-        System.out.println("ContactAddress#prePersist"); // NOT called
+        LOG.info("ContactAddress#prePersist"); // NOT called
+        Callbacks.contactAddressPrePersist();
     }
 }

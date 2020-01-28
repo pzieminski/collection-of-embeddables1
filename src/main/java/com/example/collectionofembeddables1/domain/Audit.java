@@ -4,6 +4,9 @@
  */
 package com.example.collectionofembeddables1.domain;
 
+import com.example.collectionofembeddables1.Callbacks;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
@@ -13,6 +16,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Embeddable
+@Slf4j
 public class Audit {
 
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -25,6 +29,7 @@ public class Audit {
 
     @PrePersist
     public void prePersist() {
-        System.out.println("Audit#prePersist"); // called
+        LOG.info("Audit#prePersist"); // called
+        Callbacks.auditPrePersist();
     }
 }
