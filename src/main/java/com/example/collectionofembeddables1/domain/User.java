@@ -1,6 +1,5 @@
 package com.example.collectionofembeddables1.domain;
 
-import com.example.collectionofembeddables1.Callbacks;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,24 +56,20 @@ public class User {
     @PostLoad
     public void postLoad() {
         LOG.info("postLoad");
-        Callbacks.userPostLoad();
     }
 
     @PrePersist
     public void prePersist() {
         LOG.info("prePersist");
-        Callbacks.userPrePersist();
     }
 
     @PreUpdate
     public void preUpdate() {
         LOG.info("preUpdate");
-        Callbacks.userPreUpdate();
     }
 
     @PreRemove
     public void preRemove() {
         LOG.info("preRemove");
-        Callbacks.userPreRemove();
     }
 }

@@ -1,7 +1,11 @@
 package com.example.collectionofembeddables1;
 
+import com.example.collectionofembeddables1.domain.Audit;
 import com.example.collectionofembeddables1.domain.ContactAddress;
 import com.example.collectionofembeddables1.domain.User;
+import mockit.Invocation;
+import mockit.Mock;
+import mockit.MockUp;
 import mockit.Mocked;
 import mockit.Verifications;
 
@@ -24,6 +28,9 @@ class CollectionOfEmbeddables1Test {
 
     @Test
     void test(@Mocked Callbacks callbacks) {
+        mockUpUser();
+        mockUpAudit();
+        mockUpContactAddress();
 
         txRunner.runInNewTransaction(() -> {
             User user = new User();
@@ -107,5 +114,80 @@ class CollectionOfEmbeddables1Test {
             times = 1;
         }};
 
+    }
+
+    private void mockUpUser() {
+        new MockUp<User>() {
+
+            @Mock
+            public void postLoad(Invocation invocation) {
+                Callbacks.userPostLoad();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void prePersist(Invocation invocation) {
+                Callbacks.userPrePersist();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void preUpdate(Invocation invocation) {
+                Callbacks.userPreUpdate();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void preRemove(Invocation invocation) {
+                Callbacks.userPreRemove();
+                invocation.proceed();
+            }
+        };
+    }
+
+    private void mockUpAudit() {
+        new MockUp<Audit>() {
+
+            @Mock
+            public void postLoad(Invocation invocation) {
+                Callbacks.auditPostLoad();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void prePersist(Invocation invocation) {
+                Callbacks.auditPrePersist();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void preUpdate(Invocation invocation) {
+                Callbacks.auditPreUpdate();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void preRemove(Invocation invocation) {
+                Callbacks.auditPreRemove();
+                invocation.proceed();
+            }
+        };
+    }
+
+    private void mockUpContactAddress() {
+        new MockUp<ContactAddress>() {
+
+            @Mock
+            public void postLoad(Invocation invocation) {
+                Callbacks.contactAddressPostLoad();
+                invocation.proceed();
+            }
+
+            @Mock
+            public void prePersist(Invocation invocation) {
+                Callbacks.contactAddressPrePersist();
+                invocation.proceed();
+            }
+        };
     }
 }

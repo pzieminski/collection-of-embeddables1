@@ -1,6 +1,5 @@
 package com.example.collectionofembeddables1.domain;
 
-import com.example.collectionofembeddables1.Callbacks;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +31,10 @@ public class ContactAddress {
     @PostLoad
     public void postLoad() {
         LOG.info("postLoad"); // NOT called
-        Callbacks.contactAddressPostLoad();
     }
 
     @PrePersist
     public void prePersist() {
         LOG.info("prePersist"); // NOT called
-        Callbacks.contactAddressPrePersist();
     }
 }
